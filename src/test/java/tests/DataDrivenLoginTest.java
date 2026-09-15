@@ -17,7 +17,7 @@ public	class	DataDrivenLoginTest	{
     private WebDriver getDriver() {
         return driver.get();
     }
-    
+
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
     public void setUp(@Optional("chrome") String browser) {

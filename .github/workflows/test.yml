@@ -27,6 +27,6 @@ jobs:
           cache: maven
 
       - name: Run Smoke Tests
-        run: mvn clean test -Dcucumber.filter.tags="@Smoke"
+        run: mvn clean test -Dcucumber.filter.tags="@Smoke"  -Dheadless=true
         env:
           CHROME_BIN: /usr/bin/chromium-browser

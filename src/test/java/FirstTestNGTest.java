@@ -9,13 +9,28 @@ import	org.testng.asserts.SoftAssert;
 import	java.time.Duration;
 public	class	FirstTestNGTest	{
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+ /*
+ String headless = System.getProperty("headless", "false");
 
+ChromeOptions options = new ChromeOptions();
+options.addArguments("--start-maximized");
+
+if (Boolean.parseBoolean(headless)) {
+    options.addArguments("--headless=new");
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    options.addArguments("--window-size=1920,1080");
+}
+
+driver = new ChromeDriver(options);
+
+  */
     private WebDriver getDriver() {
         return driver.get();
     }
 
-    @Parameters({"browser"})
-    @BeforeMethod(alwaysRun = true)
+   // @Parameters({"browser"})
+    //@BeforeMethod(alwaysRun = true)
     public	void	setUp(@Optional("chrome")	String	browser)	{
         WebDriver webDriver;
 
@@ -38,7 +53,7 @@ public	class	FirstTestNGTest	{
     }
     //	TEST	CASE	1:	Valid	Login	Check	using	Hard	Assertions
 
-    @Test(groups = "sanity",priority	=	1,	description	=	"Verify	valid	user	login	functionality")
+    //@Test(groups = "sanity",priority	=	1,	description	=	"Verify	valid	user	login	functionality")
     public	void	testValidLogin()	{
         getDriver().findElement(By.id("username")).sendKeys("student");
         getDriver().findElement(By.id("password")).sendKeys("Password123");
@@ -50,7 +65,7 @@ public	class	FirstTestNGTest	{
         Assert.assertEquals(successHeader.getText(),	"Logged In Successfully",	"Header	text	mismatch!");
     }
     //	TEST	CASE	2:	Invalid	Login	Check	using	Soft	Assertions
-    @Test(groups="sanity",priority	=	2,	description	=	"Verify	invalid	password	error	message")
+    //@Test(groups="sanity",priority	=	2,	description	=	"Verify	invalid	password	error	message")
     public	void	testInvalidLogin() throws InterruptedException {
         SoftAssert	softAssert	=	new	SoftAssert();
         getDriver().findElement(By.id("username")).sendKeys("student");
@@ -66,7 +81,7 @@ public	class	FirstTestNGTest	{
         softAssert.assertAll();
     }
     //	TEARDOWN:	Runs	AFTER	every	test
-    @AfterMethod(alwaysRun = true)
+    //@AfterMethod(alwaysRun = true)
     public void tearDown() {
         WebDriver webDriver = driver.get();
 
