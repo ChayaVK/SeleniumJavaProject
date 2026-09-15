@@ -28,3 +28,5 @@ jobs:
 
       - name: Run Smoke Tests
         run: mvn clean test -Dcucumber.filter.tags="@Smoke"
+        env:
+          CHROME_BIN: /usr/bin/chromium-browser
