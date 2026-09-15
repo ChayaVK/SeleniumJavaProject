@@ -38,7 +38,7 @@ public	class	FirstTestNGTest	{
     }
     //	TEST	CASE	1:	Valid	Login	Check	using	Hard	Assertions
 
-    @Test(groups = "smoke",priority	=	1,	description	=	"Verify	valid	user	login	functionality")
+    @Test(groups = "sanity",priority	=	1,	description	=	"Verify	valid	user	login	functionality")
     public	void	testValidLogin()	{
         getDriver().findElement(By.id("username")).sendKeys("student");
         getDriver().findElement(By.id("password")).sendKeys("Password123");
@@ -50,16 +50,18 @@ public	class	FirstTestNGTest	{
         Assert.assertEquals(successHeader.getText(),	"Logged In Successfully",	"Header	text	mismatch!");
     }
     //	TEST	CASE	2:	Invalid	Login	Check	using	Soft	Assertions
-    @Test(groups="regression",priority	=	2,	description	=	"Verify	invalid	password	error	message")
-    public	void	testInvalidLogin()	{
+    @Test(groups="sanity",priority	=	2,	description	=	"Verify	invalid	password	error	message")
+    public	void	testInvalidLogin() throws InterruptedException {
         SoftAssert	softAssert	=	new	SoftAssert();
         getDriver().findElement(By.id("username")).sendKeys("student");
         getDriver().findElement(By.id("password")).sendKeys("WrongPassword");
         getDriver().findElement(By.id("submit")).click();
+        Thread.sleep(4000);
         WebElement	errorElement	=	getDriver().findElement(By.id("error"));
+
 //	Soft	Assertions	continue	execution	even	if	one	check	fails
-        softAssert.assertTrue(errorElement.isDisplayed(),	"Error	message	is	not	visible!");
-        softAssert.assertEquals(errorElement.getText(),	"Your password is invalid!",	"Error	text	mismatch!");
+        softAssert.assertTrue(errorElement.isDisplayed(),	"Error message is not	visible!");
+        softAssert.assertEquals(errorElement.getText(),	"Your password is invalid!",	"Error text mismatch!");
 //	Mandatory	call	to	collapse	all	soft	assertions	and	report	failure	if	any	failed
         softAssert.assertAll();
     }

@@ -18,7 +18,7 @@ public	class	DataDrivenLoginTest	{
     }
     @Parameters({"browser"})
     @BeforeMethod(alwaysRun = true)
-    public	void	setUp(String browser)	{
+    public	void	setUp(@Optional("chrome")	String browser)	{
         WebDriver webDriver;
 
         if (browser.equalsIgnoreCase("chrome")) {
