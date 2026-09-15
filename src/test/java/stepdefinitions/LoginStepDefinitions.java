@@ -17,7 +17,11 @@ public	class	LoginStepDefinitions	{
     @Before
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-blink-features=AutomationControlled");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
